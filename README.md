@@ -1,0 +1,4 @@
+skeletons
+=========
+
+Skeleton starter scripts
