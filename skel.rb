@@ -14,7 +14,7 @@
 #
 # === AUTHOR
 #
-#     Chris Reisor (creisor@groupon.com)
+#     Chris Reisor (creisor@gmail.com)
 
 $LOAD_PATH.unshift(File.expand_path(File.join(File.dirname(__FILE__), "../lib")))
 
