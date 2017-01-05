@@ -27,18 +27,27 @@ class App
     @log.level = Logger::WARN
     @options = {
       :verbose => false,
+      :something => 'default',
     }
   end
 
-  def main
+  def parse_options
     opts = OptionParser.new do |opts|
       opts.on('-v', '--verbose', 'write debug output to stderr') do
         @options[:verbose] = true
         @log.level = Logger::DEBUG
         @log.debug "VERBOSE enabled"
       end
+      opts.on('-f', '--somearg SOMETHING', 'option that takes an argument') do |something|
+        @options[:something] = something
+      end
       opts.parse!(ARGV)
     end
+  end
+
+  def main
+    parse_options
+    puts "Your 'something' option contains: #{@options[:something]}"
   end
 end
 
