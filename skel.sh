@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Uncomment to exit immediately upon failure:
+#set -e
+
 ## Test for root
 #test $UID -eq 0 || (echo "Must be run as root" && exit 1)
 
@@ -7,12 +10,21 @@
 VERBOSE=0
 DEBUG=0
 FOO=''
+# Allow for overriding BAR on the commandline
+: ${BAR='default'}
 ######################################################
 
 usage () {
-    echo "Usage: ${0##*/} -f <foo> [-d] [-v]
+    echo "NAME:
+    ${0##*/}
 
-Does something
+USAGE:
+
+    ${0##*/} -f <foo> [-d] [-v]
+
+Brief description goes here
+
+OPTIONS:
 
     -f <foo>                An option that takes an arg
     -v                      Enable verbose mode, for debugging
@@ -31,7 +43,7 @@ echo_d () {
 }
 
 run_cmd () {
-    # run the command when *not* in debug m ode
+    # run the command when *not* in debug mode
     [ ${DEBUG} -eq 1 ] && echo_d $* || eval $*
 }
 
@@ -51,6 +63,10 @@ while getopts "f:dvh" Option; do
     esac
 done
 ############################################################
+
+if [ ${DEBUG} -eq 1 ]; then
+  set -x
+fi
 
 main () {
 
