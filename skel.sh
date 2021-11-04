@@ -1,7 +1,10 @@
 #!/bin/bash
 
-# Uncomment to exit immediately upon failure:
-#set -e
+set -o nounset
+set -o errexit
+set -o pipefail
+shopt -s lastpipe
+shopt -s inherit_errexit
 
 ## Test for root
 #test $UID -eq 0 || (echo "Must be run as root" && exit 1)
